@@ -1,0 +1,42 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion rootProject.ext.androidCompileSdkVersion
+    buildToolsVersion rootProject.ext.androidBuildToolsVersion
+    defaultConfig {
+        applicationId "com.circle_vi.basekotlin"
+        minSdkVersion rootProject.ext.androidMinSdkVersion
+        targetSdkVersion rootProject.ext.androidTargetSdkVersion
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile project(':data')
+    compile project(':domain')
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    def presentationDependencies = rootProject.ext.presentationDependencies
+    def presentationTestDependencies = rootProject.ext.presentationTestDependencies
+
+    implementation rootProject.ext.kotlinGradle + kotlin_version
+    implementation presentationDependencies.appcompat
+    implementation presentationDependencies.constraintLayout
+
+    testImplementation presentationTestDependencies.junit
+    androidTestImplementation presentationTestDependencies.runner
+    androidTestImplementation presentationTestDependencies.espresso
+}

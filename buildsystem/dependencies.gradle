@@ -1,0 +1,65 @@
+allprojects {
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+
+
+}
+
+ext {
+    //Android
+    androidBuildToolsVersion = "26.0.0"
+    androidMinSdkVersion = 15
+    androidTargetSdkVersion = 26
+    androidCompileSdkVersion = 26
+    androidSupportVersion = "26.0.0"
+
+    //test
+    junitVersion = "4.12"
+    runnerVersion = "1.0.0"
+    espressoVersion = "3.0.0"
+
+    //libraries
+    constraintLayoutVersion = "1.0.2"
+    daggerVersion = "2.10"
+    butterknifeVersion = "8.7.0"
+
+    kotlinGradle = "org.jetbrains.kotlin:kotlin-stdlib-jre7:"
+
+
+    presentationDependencies = [
+            "appcompat"            : "com.android.support:appcompat-v7:$androidSupportVersion",
+            "constraintLayout"     : "com.android.support.constraint:constraint-layout:$constraintLayoutVersion",
+            "dagger"               : "com.google.dagger:dagger:$daggerVersion",
+            "daggerAnnotation"     : "com.google.dagger:dagger-compiler:$daggerVersion",
+            "butterknife"          : "com.jakewharton:butterknife:$daggerVersion",
+            "butterknifeAnnotation": "com.jakewharton:butterknife-compiler:$daggerVersion"
+    ]
+
+    dataDependencies = [
+            "dagger"          : "com.google.dagger:dagger:$daggerVersion",
+            "daggerAnnotation": "com.google.dagger:dagger-compiler:$daggerVersion"
+    ]
+
+    domainDependencies = [
+            "dagger"          : "com.google.dagger:dagger:$daggerVersion",
+            "daggerAnnotation": "com.google.dagger:dagger-compiler:$daggerVersion"
+    ]
+
+    presentationTestDependencies = [
+            "junit" : "junit:junit:$junitVersion",
+            "runner": "com.android.support.test:runner:$runnerVersion",
+            "espresso": "com.android.support.test.espresso:espresso-core:$espressoVersion"
+    ]
+
+    domainTestDependencies = [
+            "junit" : "junit:junit:$junitVersion",
+            "runner": "com.android.support.test:runner:$runnerVersion"
+    ]
+
+    dataTestDependencies = [
+            "junit" : "junit:junit:$junitVersion",
+            "runner": "com.android.support.test:runner:$runnerVersion"
+    ]
+}

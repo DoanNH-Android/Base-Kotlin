@@ -9,11 +9,11 @@ allprojects {
 
 ext {
     //Android
-    androidBuildToolsVersion = "26.0.0"
+    androidBuildToolsVersion = "26.0.2"
     androidMinSdkVersion = 15
     androidTargetSdkVersion = 26
     androidCompileSdkVersion = 26
-    androidSupportVersion = "26.0.0"
+    androidSupportVersion = "26.0.2"
 
     //test
     junitVersion = "4.12"
@@ -30,6 +30,7 @@ ext {
 
     presentationDependencies = [
             "appcompat"            : "com.android.support:appcompat-v7:$androidSupportVersion",
+            "supportDesign"        : "com.android.support:design:$androidSupportVersion",
             "constraintLayout"     : "com.android.support.constraint:constraint-layout:$constraintLayoutVersion",
             "dagger"               : "com.google.dagger:dagger:$daggerVersion",
             "daggerAnnotation"     : "com.google.dagger:dagger-compiler:$daggerVersion",
@@ -48,8 +49,8 @@ ext {
     ]
 
     presentationTestDependencies = [
-            "junit" : "junit:junit:$junitVersion",
-            "runner": "com.android.support.test:runner:$runnerVersion",
+            "junit"   : "junit:junit:$junitVersion",
+            "runner"  : "com.android.support.test:runner:$runnerVersion",
             "espresso": "com.android.support.test.espresso:espresso-core:$espressoVersion"
     ]
 

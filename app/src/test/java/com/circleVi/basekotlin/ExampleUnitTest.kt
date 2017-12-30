@@ -1,4 +1,4 @@
-package com.circle_vi.basekotlin
+package com.circleVi.basekotlin
 
 import org.junit.Test
 

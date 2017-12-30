@@ -1,4 +1,4 @@
-package com.circle_vi.basekotlin
+package com.circleVi.basekotlin
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4

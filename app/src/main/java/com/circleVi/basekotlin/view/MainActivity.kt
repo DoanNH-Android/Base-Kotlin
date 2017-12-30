@@ -1,7 +1,8 @@
-package com.circle_vi.basekotlin
+package com.circleVi.basekotlin.view
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
+import com.circleVi.basekotlin.R
 
 class MainActivity : AppCompatActivity() {
 

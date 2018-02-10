@@ -27,7 +27,6 @@ android {
             debuggable false
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-
             signingConfig null
         }
     }
@@ -55,4 +54,10 @@ dependencies {
     testImplementation presentationTestDependencies.junit
     androidTestImplementation presentationTestDependencies.runner
     androidTestImplementation presentationTestDependencies.espresso
+
+    implementation presentationDependencies.rxJava
+    implementation presentationDependencies.rxAndroid
+
+    implementation presentationDependencies.glide
+
 }

@@ -1,14 +1,12 @@
-package com.circleVi.basekotlin.utils.threadpool
+package com.circleVi.basekotlin.common.utils.threadpool
 
 import java.util.concurrent.*
 
 class DefaultExecutor private constructor() : IExecutor {
     companion object {
         private val MAX_POOL_SIZE = 2 * Runtime.getRuntime().availableProcessors() + 1
-
-        private val CORE_POOL_SIZE = 0
-
-        private val TIME_A_LIVE = 5
+        private const val CORE_POOL_SIZE = 0
+        private const val TIME_A_LIVE = 5
 
         private var sInstance: DefaultExecutor? = null
 

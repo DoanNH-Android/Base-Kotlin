@@ -1,4 +1,4 @@
-package photoprinter.canon.com.photoprinter.scenes.base
+package com.circleVi.basekotlin.view.base
 
 import android.graphics.Color
 import android.os.Bundle
@@ -9,9 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import com.circleVi.basekotlin.R
-import com.circleVi.basekotlin.utils.permission.Permission
-import com.circleVi.basekotlin.view.base.BaseActivity
-import com.circleVi.basekotlin.view.base.BaseView
+import com.circleVi.basekotlin.common.utils.permission.Permission
 import kotlinx.android.synthetic.main.fragment_base.*
 
 abstract class BaseFragment : Fragment(), BaseView, BaseTransitionFragment {
@@ -19,13 +17,14 @@ abstract class BaseFragment : Fragment(), BaseView, BaseTransitionFragment {
     protected val activityParent: BaseActivity?
         get() = activity as? BaseActivity
 
+    //region implement Fragment
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         onAttachView()
+
         val baseView = inflater.inflate(R.layout.fragment_base, container, false)
-
         val contentView = inflater.inflate(getLayoutId(), null)
-
         baseView.findViewById<FrameLayout>(R.id.containerBase).addView(contentView)
+
         return baseView
     }
 
@@ -36,21 +35,13 @@ abstract class BaseFragment : Fragment(), BaseView, BaseTransitionFragment {
         initData(arguments)
     }
 
-    private fun initBaseView() {
-        setupSwipeRefresh()
-        val visibleToolbar = setupToolbar()
-        toolbarBase.visibility = if (visibleToolbar) View.VISIBLE else View.GONE
-    }
-
-    override fun requestPermissions(vararg permissions: String, callback: (areGrantedAll: Boolean, deniedPermissions: List<Permission>) -> Unit) {
-        activityParent?.requestPermissions(*permissions, callback = callback)
-    }
-
     override fun onDestroyView() {
         onDetachView()
         super.onDestroyView()
     }
+    //endregion implement Fragment
 
+    //region implement BaseView
     override fun showLoading() {
         activityParent?.showLoading()
     }
@@ -71,6 +62,12 @@ abstract class BaseFragment : Fragment(), BaseView, BaseTransitionFragment {
         activityParent?.hideSoftKeyboard()
     }
 
+    override fun requestPermissions(vararg permissions: String, callback: (areGrantedAll: Boolean, deniedPermissions: List<Permission>) -> Unit) {
+        activityParent?.requestPermissions(*permissions, callback = callback)
+    }
+    //endregion implement BaseView
+
+    //region implement BaseTransitionFragment
     override fun popBackStack() {
         activityParent?.popBackStack()
     }
@@ -82,9 +79,17 @@ abstract class BaseFragment : Fragment(), BaseView, BaseTransitionFragment {
     override fun replaceFragment(fragment: Fragment, withAnimation: Boolean, animations: IntArray?) {
         activityParent?.replaceFragment(fragment, withAnimation, animations)
     }
+    //endregion implement BaseTransitionFragment
+
+    //region implement private/public method
+    private fun initBaseView() {
+        setupSwipeRefresh()
+        val visibleToolbar = setupToolbar()
+        toolbarBase.visibility = if (visibleToolbar) View.VISIBLE else View.GONE
+    }
 
     private fun setupSwipeRefresh() {
-        swipeRefreshBase.isEnabled = enableSwipeRefresh()
+        swipeRefreshBase.isEnabled = isRefreshable()
         if (swipeRefreshBase.isEnabled) {
             swipeRefreshBase.setOnRefreshListener {
                 onPullRefresh()
@@ -110,8 +115,7 @@ abstract class BaseFragment : Fragment(), BaseView, BaseTransitionFragment {
         if (menu != null) {
             toolbarBase.inflateMenu(menu)
             toolbarBase.setOnMenuItemClickListener { menuItem ->
-                onMenuItemClicked(menuItem)
-                return@setOnMenuItemClickListener true
+                return@setOnMenuItemClickListener onMenuItemClicked(menuItem)
             }
         }
 
@@ -120,16 +124,18 @@ abstract class BaseFragment : Fragment(), BaseView, BaseTransitionFragment {
         toolbarBase.setBackgroundColor(getToolbarBackground())
         return isShowToolbar()
     }
+    //endregion implement private/public method
 
+    //region implement override-able method
     open fun onBackPressed(): Boolean = false
 
-    open fun enableSwipeRefresh(): Boolean = false
+    open fun isRefreshable(): Boolean = false
 
     open fun onPullRefresh() {}
 
     open fun isShowToolbar(): Boolean = true
 
-    open fun onMenuItemClicked(item: MenuItem) {}
+    open fun onMenuItemClicked(item: MenuItem): Boolean = false
 
     open fun onNavigationIconClicked() {}
 
@@ -150,4 +156,5 @@ abstract class BaseFragment : Fragment(), BaseView, BaseTransitionFragment {
     abstract fun onAttachView()
 
     abstract fun onDetachView()
+    //endregion implement private/public method
 }

@@ -1,8 +1,9 @@
 package com.circleVi.basekotlin.view.base
 
-import com.circleVi.basekotlin.utils.permission.Permission
+import com.circleVi.basekotlin.common.utils.permission.Permission
 
 interface BaseView {
+
     fun showLoading()
 
     fun hideLoading()

@@ -1,4 +1,4 @@
-package com.circleVi.basekotlin.utils.permission
+package com.circleVi.basekotlin.common.utils.permission
 
 data class Permission constructor(
         val permission: String,

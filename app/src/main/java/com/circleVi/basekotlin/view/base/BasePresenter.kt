@@ -1,9 +1,11 @@
-package photoprinter.canon.com.photoprinter.scenes.base
+package com.circleVi.basekotlin.view.base
 
+import io.reactivex.disposables.CompositeDisposable
 import java.lang.ref.WeakReference
 
 
 abstract class BasePresenter<V> {
+
     private val isViewAttached: Boolean
         get() = weakView != null && weakView?.get() != null
 
@@ -11,6 +13,9 @@ abstract class BasePresenter<V> {
         get() = weakView?.get()
 
     private var weakView: WeakReference<V>? = null
+    private val disposables: CompositeDisposable by lazy {
+        CompositeDisposable()
+    }
 
     fun attachView(view: V) {
         if (!isViewAttached) {
@@ -19,6 +24,7 @@ abstract class BasePresenter<V> {
     }
 
     open fun detachView() {
+        disposables.clear()
         weakView?.clear()
         weakView = null
     }

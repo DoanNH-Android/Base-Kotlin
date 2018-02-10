@@ -1,4 +1,4 @@
-package com.circleVi.basekotlin.utils.permission
+package com.circleVi.basekotlin.common.utils.permission
 
 import android.os.Build
 import android.support.v4.app.FragmentActivity

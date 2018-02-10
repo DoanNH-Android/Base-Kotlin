@@ -1,4 +1,4 @@
-package com.circleVi.basekotlin.utils.threadpool
+package com.circleVi.basekotlin.common.utils.threadpool
 
 import java.util.concurrent.Executor
 import java.util.concurrent.ThreadPoolExecutor

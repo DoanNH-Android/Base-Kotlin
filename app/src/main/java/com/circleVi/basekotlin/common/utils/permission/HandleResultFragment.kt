@@ -1,4 +1,4 @@
-package com.circleVi.basekotlin.utils.permission
+package com.circleVi.basekotlin.common.utils.permission
 
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -9,14 +9,14 @@ import android.support.v4.app.Fragment
 
 
 class HandleResultFragment : Fragment() {
+
     companion object {
         private const val PERMISSION_REQUEST_CODE = 1
         val TAG = HandleResultFragment.toString()
     }
 
     private val mRequestSubjects: HashMap<String, (Permission) -> Unit> = HashMap()
-
-    var shareResultCallback: ((requestCode: Int, resultCode: Int, data: Intent?) -> Unit)? = null
+    private var shareResultCallback: ((requestCode: Int, resultCode: Int, data: Intent?) -> Unit)? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,8 +51,9 @@ class HandleResultFragment : Fragment() {
     fun getPermissionSubject(permission: String): ((Permission) -> Unit)? = mRequestSubjects[permission]
 
     @RequiresApi(Build.VERSION_CODES.M)
-    fun isGranted(permission: String): Boolean =
-            activity.checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED
+    fun isGranted(permission: String): Boolean {
+        return activity?.checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED
+    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         shareResultCallback?.invoke(requestCode, resultCode, data)

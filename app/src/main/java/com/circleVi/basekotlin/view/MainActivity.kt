@@ -1,13 +1,19 @@
 package com.circleVi.basekotlin.view
 
-import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import com.circleVi.basekotlin.R
+import com.circleVi.basekotlin.view.base.BaseActivity
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+    override fun getLayoutId(): Int {
+        return R.layout.activity_main
+    }
+
+    override fun onAttachView() {
+        //do nothing
+    }
+
+    override fun onDetachView() {
+        //do nothing
     }
 }

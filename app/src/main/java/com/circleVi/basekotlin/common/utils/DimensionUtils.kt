@@ -1,4 +1,4 @@
-package com.circleVi.basekotlin.utils
+package com.circleVi.basekotlin.common.utils
 
 import android.content.res.Resources
 
